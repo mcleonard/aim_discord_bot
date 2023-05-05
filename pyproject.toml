@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "aim-doc-bot"
+version = "0.1.0"
+description = "Discord bot for documentation queries"
+authors = ["Mat Leonard"]
+readme = "README.md"
+packages = [{include = "aim_doc_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^0.27.6"
+langchain = "^0.0.159"
+chromadb = "^0.3.21"
+unstructured = "^0.6.3"
+tiktoken = "^0.3.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+mypy = "^1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
