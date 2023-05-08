@@ -13,6 +13,7 @@ langchain = "^0.0.159"
 chromadb = "^0.3.21"
 unstructured = "^0.6.3"
 tiktoken = "^0.3.3"
+discord-py = "^2.2.3"
 
 
 [tool.poetry.group.dev.dependencies]
