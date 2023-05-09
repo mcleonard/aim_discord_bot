@@ -22,9 +22,9 @@ Please include any Python code that is relevant to the answer.
 Relevant text, if any:"""
 
 
-combine_prompt_template = """Given the following summaries from the documentation, 
-collect them into one combined answer for the user's question. If you don't have a good 
-answer, just say that you don't know.
+combine_prompt_template = """Given the following summaries from the framework documentation, 
+collect them into one combined answer for the user's question. Include Python code if relevant.
+If you don't have a good answer, just say that you don't know.
 Summaries:
 {summaries}
 Question: {question}
