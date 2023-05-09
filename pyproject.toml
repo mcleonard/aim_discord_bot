@@ -7,13 +7,14 @@ readme = "README.md"
 packages = [{include = "aim_doc_bot"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.10,<3.11"
 openai = "^0.27.6"
 langchain = "^0.0.159"
 chromadb = "^0.3.21"
 unstructured = "^0.6.3"
 tiktoken = "^0.3.3"
 discord-py = "^2.2.3"
+aim = "^3.17.4"
 
 
 [tool.poetry.group.dev.dependencies]

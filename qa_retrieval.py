@@ -1,10 +1,17 @@
 from pathlib import Path
 
+from langchain.callbacks import AimCallbackHandler
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
+
+aim_callback = AimCallbackHandler(
+    repo=".",
+    experiment_name="Aim Documents Bot",
+)
+
 
 question_prompt_template = """You are a help bot for an open source software community.
 Use this section of the documentation to answer a user's question, if the text is related
@@ -36,7 +43,7 @@ def build_qa(doc_dir: str):
         template=combine_prompt_template, input_variables=["summaries", "question"]
     )
 
-    llm = OpenAI(temperature=0.2)
+    llm = OpenAI(temperature=0.2, callbacks=[aim_callback])
 
     qa = RetrievalQA.from_chain_type(
         llm=llm,
@@ -46,6 +53,7 @@ def build_qa(doc_dir: str):
             "question_prompt": QUESTION_PROMPT,
             "combine_prompt": COMBINE_PROMPT,
         },
+        callbacks=[aim_callback]
     )
 
     return qa
@@ -64,3 +72,10 @@ def load_documentation(doc_dir: str):
         for filepath in markdown_files
     ]
     return loaders
+
+if __name__ == "__main__":
+    qa = build_qa("../aim/docs/source")
+
+    print(qa.run("What data is captured as text?"))
+
+    aim_callback.flush_tracker(langchain_asset=qa, reset=False, finish=True)
